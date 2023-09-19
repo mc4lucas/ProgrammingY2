@@ -10,4 +10,23 @@ public class TestingExecutionTime {
     public static void myFooter(int qtn){ //qtn is local
         System.out.printf("%s\nCompletion of Lab Exercise 1-Q%d is successful!\nSigning off - Lucas\n%s",splitter,qtn,splitter); //output
     }
+
+    public static long iterativeMethodForFactorial(int n){
+        int i = 0; //
+        while(n!=1){
+            return iterativeMethodForFactorial(n-1);
+        }
+    }
+
+    public static long recursiveMethodForFactorial(int n){ //Recursive approach to solving problem
+        if(n<=1){//Base case
+            return n;
+        }else{ //If first option is invalid then repeat this function until it is valid
+            return n * recursiveMethodForFactorial(n-1);
+        }
+    }
+
+    public static void main(String[] main){
+        System.out.println(recursiveMethodForFactorial(5));
+    }
 }
