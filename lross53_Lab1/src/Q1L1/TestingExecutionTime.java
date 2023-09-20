@@ -78,6 +78,6 @@ public class TestingExecutionTime {
         System.out.printf("Time taken by recursive method call: %.3e sec\n",((currentTime-pastTime)/1e+9)); //Calculating change in time stamp 1 to 2 and converting to seconds
         //endregion
 
-        myFooter(1);
+        myFooter(1); //Calling footer
     }
 }
