@@ -16,7 +16,7 @@ public class WorkingWithArrays {
     }
     //endregion
 
-    public static double[] mma5MethodLucas(double[] array){
+    public static double[] mma5MethodLucas(int[] array){
         double[] newArray = new double[0]; //new array for divisible numbers
         double[] finalArray = new double[4]; //The array that will be returned
         //region Divisibility Check
@@ -107,13 +107,13 @@ public class WorkingWithArrays {
         myHeader(2); //Calling header
 
         System.out.print("Enter array size: ");
-        double[] array = new double[input.nextInt()]; //Creating an array of size entered by user
+        int[] array = new int[input.nextInt()]; //Creating an array of size entered by user
 
         //region Populate array
             int pos = 0; //Incrementer
             while(pos < array.length){
                 System.out.printf("Enter value %d: ",pos+1);
-                array[pos] = input.nextDouble(); //Adding user input to array
+                array[pos] = input.nextInt(); //Adding user input to array
 
                 pos++; //Increment
             }
