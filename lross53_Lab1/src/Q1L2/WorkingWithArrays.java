@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class WorkingWithArrays {
     public static Scanner input = new Scanner(System.in);
-
+    public static int counter = 0; //Used for final print
     //region Header & footer
     public static String splitter = "======================================================="; //Storage var for the long splitter used in header and footer methods
     public static void myHeader(int qtn){ //qtn is local
@@ -89,6 +89,7 @@ public class WorkingWithArrays {
                 finalArray[0] = max; //Setting up the final array with calculated values
                 finalArray[1] = min;
                 finalArray[2] = avg;
+                counter = newArray.length; //Setting the total
             //endregion
         }else{
             //region Final Array Creation
@@ -123,7 +124,7 @@ public class WorkingWithArrays {
         if(info[0] == 0 && info[1] == 0 && info[2] == 0){
             System.out.println("\nHere is the result...... \n\nIn the array, there was no number ‘divisible by 5’ and hence the average remains 0.00."); //Done if there were no divisible numbers by 5
         }else{
-            System.out.printf("\nHere is the result......\n\nThe max is %.2f.\nThe min is %.2f.\nThe average of the ‘divisible by 5 numbers’ is %.2f.\nMy student number is %d\n",info[0],info[1],info[2],(int)info[3]); //Printing the results of info
+            System.out.printf("\nHere is the result......\n\nFound %d number(s) that are divisible by 5\nThe max is %.2f.\nThe min is %.2f.\nThe average of the ‘divisible by 5 numbers’ is %.2f.\nMy student number is %d\n",counter,info[0],info[1],info[2],(int)info[3]); //Printing the results of info
         }
 
         myFooter(2); //Calling the footer
