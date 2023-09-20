@@ -25,7 +25,7 @@ public class WorkingWithArrays {
                 if(array[pos] % 5 == 0){
                     double[] temp = new double[newArray.length + 1]; //Creating a temp array
                     System.arraycopy(newArray,0,temp,0,newArray.length); //Copying old array to temp array
-                    temp[pos] = array[pos]; //Adding new number
+                    temp[newArray.length] = array[pos]; //Adding new number
                     newArray = temp; //Removing temp array
                 }
                 pos++; //Increment
