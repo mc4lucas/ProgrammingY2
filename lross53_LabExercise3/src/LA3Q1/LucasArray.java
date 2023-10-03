@@ -45,7 +45,7 @@ public class LucasArray {
 
     public void addAtLastIndex(Pair p){
         Pair[] tempArray = new Pair[testArray.length+1]; //Temp array to store changes
-        System.arraycopy(testArray,1,tempArray,0,tempArray.length); //Copying the array
+        System.arraycopy(testArray,0,tempArray,0, testArray.length); //Copying the array
         tempArray[tempArray.length-1] = p; //Adding the sent pair to the last element of the array
         testArray = tempArray;
         tempArray = null; //Cleanup
