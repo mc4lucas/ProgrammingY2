@@ -41,7 +41,6 @@ public class DemoStackAndQueue_Lucas {
                    Pair x = new Pair(year,name);//Creating a new pair to send to array
 
                    array.addAtLastIndex(x);//Adding new pair to array
-
                    System.out.println("The current stack: " + array.toString()); //Print out current array
                } //For Push
                else if (entry == 'b') { //Pop
@@ -69,7 +68,7 @@ public class DemoStackAndQueue_Lucas {
 
         boolean exit = false; //Variable to end loop when user is done
         while(!exit){
-            System.out.println("Queue Operation Menu:\na) Push\nb) Pop\nc) Exit");
+            System.out.println("Queue Operation Menu:\na) Enqueue\nb) Dequeue\nc) Exit");
             try{ //Method used to validate entry
                 char entry = input.next().charAt(0);
                 if(entry == 'a'){ //Push

@@ -34,13 +34,11 @@ public class LucasArray {
     }
 
     public String toString(){ //Overriding the Pair toString method
-        int index = 0; //Position in loop
-        String result = "";
-        while(index < testArray.length){ //This concatenates all the pairs from the array into a string
-            result += testArray[index].toString();
+        String list = "";
+        for(int i = 0; i< testArray.length;i++){
+            list = list + testArray[i].toString();
         }
-
-        return "The current stack: [" + result + "]"; //Returning the concatenated string
+        return ("["+list+"]");
     }
 
     public void addAtLastIndex(Pair p){
