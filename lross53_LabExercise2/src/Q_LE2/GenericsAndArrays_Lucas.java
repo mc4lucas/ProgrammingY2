@@ -80,9 +80,9 @@ public class GenericsAndArrays_Lucas {
             System.out.print("Do you wish to continue? (Press y to continue or any other key to terminate): ");
             char q = input.next().charAt(0);
 
-            if(q == 78 || q == 110){
-                satisfied = true; //End loop
-            }
+            if(q == 89 || q == 121){
+                satisfied = false; //continue loop
+            }else{satisfied = true;}//end loop
         }
 
         myFooter(1); //Calling my footer
