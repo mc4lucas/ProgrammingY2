@@ -1,14 +1,17 @@
 package SingleLinkedLists;
+
+import java.util.Collections;
+
 public class SLLController {
     public static void main(String[] args){
 
-        LinkedList<Double> myList = new LinkedList<>(); //Creating a link list with data type of string
+        LinkedList<String> myList = new LinkedList<>(); //Creating a link list with data type of string
 
         //Add nodes to the link-list
-        myList.addNode(27.00);
-        myList.addNode(52.8);
-        myList.addNode(78.21);
-        myList.addNode(12.74);
+        myList.addNode("Hello");
+        myList.addNode("There");
+        myList.addNode("Sir");
+        myList.addNode("Moe");
 
         System.out.println(myList.toString());
     }

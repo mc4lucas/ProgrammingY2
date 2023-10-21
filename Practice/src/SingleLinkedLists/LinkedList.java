@@ -1,6 +1,7 @@
 package SingleLinkedLists;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class LinkedList <E>{
     private Node<E> tail;
@@ -8,15 +9,17 @@ public class LinkedList <E>{
     private int size = 0;
     public void addNode(E data){
 
-        Node<E> newNode = new Node<>(data); //Creating a new node
+        Node<E> newNode = new Node<>(data,tail); //Creating a new node
 
 
         if(size == 0){ //If it is the first node in the SLL
             tail = newNode; //Set as both tail and head
-            head = newNode;
+            head.next = newNode;
+
+            size++; //Increment
         }else{ //If it is not the first node in the SLL
-            newNode.next = head; //Set the next node for this node to be the current head
-            head = newNode; //Replace the head with this new node
+            newNode.next = head.next; //Set the next node for this node to be the current head
+            head.next = newNode; //Replace the head with this new node
 
             size++; //Increase the total size of the SLL
         }
@@ -28,13 +31,17 @@ public class LinkedList <E>{
     public Node<E> getHead(){return head;} //Getter method for the head of the SLL
 
     //Default Constructor
-    public LinkedList(){}
+    public LinkedList(){
+        head = new Node<E>(null,null);
+        tail = new Node<E>(null,null);
+        head.next = tail;
+    }
 
     @Override
     public String toString(){
         int pos = 0;
         ArrayList<E> al = new ArrayList<>();
-        Node<E> current = head;
+        Node<E> current = head.next;
 
         while(pos < size){
             al.add(current.data);
@@ -43,6 +50,8 @@ public class LinkedList <E>{
 
             pos++; //Increment
         }
+
+        Collections.reverse(al); //Fix that sheet
 
         return al.toString();
     }
