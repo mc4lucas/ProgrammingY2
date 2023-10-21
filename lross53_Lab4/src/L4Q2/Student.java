@@ -29,15 +29,7 @@ public class Student implements Comparable<Student>{ //Implementing the comparab
 
     //Overridden compareTo method
     public int compareTo(Student s){
-        if (s.score > score){
-            return 1;
-        }
-        else if (s.score<score) {
-            return -1;
-        }
-        else{
-            return 0;
-        }
+        return this.score.compareTo(s.score);
     }
 
     public Double getScore(){return score;} //Returns the score
