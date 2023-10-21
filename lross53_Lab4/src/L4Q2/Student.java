@@ -24,7 +24,7 @@ public class Student implements Comparable<Student>{ //Implementing the comparab
 
     //Overridden toString method
     public String toString(){
-        return firstName + " " + lastName + ": " + String.format(".2f",score);
+        return firstName + " " + lastName + ": " + String.format("%.2f",score);
     };
 
     //Overridden compareTo method
