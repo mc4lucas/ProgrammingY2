@@ -32,7 +32,7 @@ public class Driver {
     }
 
     public static void makeRequest(){
-        System.out.println("what would you like to do?\n\na) Board Passenger\nb) Check Seat\nc) Disembark Passenger\nd) Exit Program");
+        System.out.println("what would you like to do?\n\na) Board Passenger\nb) Check Seat\nc) Disembark Passenger\nd) View Plane\ne) Exit Program");
 
         switch (input.next().charAt(0)){
             case 'a':
@@ -121,13 +121,20 @@ public class Driver {
                         }
                     }
 
-                    System.out.println("Showing the information of the passenger in row: " + row + " Seat: " + seat + "\nName: " + currentAccessor.);
+                    if(newPlane.getSeat(row,seat).checkVacancy()){
+                        System.out.println("\nThat seat is Vacant!\n");
+                    }else{
+                        System.out.println("Showing the information of the passenger in row: " + row + " Seat: " + seat + "\nName: " + newPlane.getSeat(row,seat).getName() + "\n\n");
+                    }
 
                 break;
             case 'c':
                 //Do Something
                 break;
             case 'd':
+                    printPlane();
+                break;
+            case 'e':
                     inApplication = false; //Terminate program
                 break;
             default:
