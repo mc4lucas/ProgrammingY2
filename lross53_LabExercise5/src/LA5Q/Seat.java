@@ -38,4 +38,20 @@ public class Seat {
         public boolean checkVacancy(){
             return vacant;
         } //Returns whether the seat is vacant or not
+        public String getName(){
+            return firstName + " " + lastName;
+        }
+    //endregion
+
+    //region Setter Methods
+        public void setVacancy(boolean val){
+            vacant = val;
+        } //Changes the vacancy
+        public void setFirstName(String fName){
+            firstName = fName;
+        } //Method to set the first name
+        public void setLastName(String lName){
+            lastName = lName;
+        } //Method to set the first name
+    //endregion
 }

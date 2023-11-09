@@ -12,23 +12,24 @@ public class Plane {
 
         planeRows = new DLL[rows];
 
-        int i = 0; //Incrementor for row creation
-        int j = 0; //Incrementor for seat creation
+        int i = 1; //Incrementor for row creation
+        int j = 1; //Incrementor for seat creation
 
 
-        while(i < rows){ //Creating the rows of the plane
-
+        while(i < rows + 1){ //Creating the rows of the plane
+            //System.out.println("Working on row " + i); //Debug
             DLL List = new DLL(); //Creating a new double linked list
-            planeRows[i] = List; //Adding the dll to the rows array
+            planeRows[i-1] = List; //Adding the dll to the rows array
 
+
+            while(j < seats + 1){
+                List.addSeat(i,j); //Creating the seat
+
+                j++; //incrementing to use in seat creation
+            }
 
             i++; //Increment the rows ahead of time to use this in the seat creation process
-
-            while(j < seats){
-                j++; //Pre incrementing to use in seat creation
-
-                List.addSeat(i,j); //Creating the seat
-            }
+            j=1; //Reset j
         }
     }
 
@@ -38,6 +39,6 @@ public class Plane {
     public int getSeats(){return this.seats;} //Method to get the number of seats in each row
 
     public Seat getSeat(int row, int seat){
-        return planeRows[row].getSeat(seat); //Finds the seat in the DLL
+        return planeRows[row-1].getSeat(seat); //Finds the seat in the DLL
     }
 }
