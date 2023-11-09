@@ -19,19 +19,41 @@ public class DLL {
     }
 
 
-    public void addSeat(){
+    public void addSeat(int row, int seat){
         //For the first seat
             if (size == 0){
-            Seat newSeat = new Seat();
-            newSeat.previous = head;
-            newSeat.next = tail;
+            Seat newSeat = new Seat(row,seat); //Creating a new seat
+            newSeat.previous = head; //Linking the new seat to the head
+            newSeat.next = tail; //Linking the new seat to the tail
 
-            head.next = newSeat;
-            tail.previous = newSeat;
+            head.next = newSeat; //Linking the head to the new seat
+            tail.previous = newSeat; //Linking the tail to the new seat
 
             size++; //Increment the size of the DLL
         }
         //For all consecutive seat
-            if(size > 0){}
+
+                            //Method of adding last
+
+            if(size > 0){
+                Seat newSeat = new Seat(row,seat); //Creating a new seat
+
+                newSeat.previous = tail.previous; //Linking the new seat to the seat that was in front of the tail
+                tail.previous = newSeat; //Reassigning the tail to be behind the new seat
+                newSeat.next = tail; //Linking the new seat to the tail
+            }
+    } //Method that creates a new seat in the row of the plane
+
+    public Seat getSeat(int seat){
+        Seat seatToReturn = head; //Storage var
+
+        int i = 0; //Incrementor
+
+        while(i < seat){
+            seatToReturn = seatToReturn.next;
+            i++; //Increment
+        }
+
+        return seatToReturn; //Returns the requested seat
     }
 }
