@@ -32,7 +32,7 @@ public class Driver {
     }
 
     public static void makeRequest(){
-        System.out.println("what would you like to do?\n\na) Board Passenger\nb) Check Seat\nc) Disembark Passenger\nd) View Plane\ne) Exit Program");
+        System.out.println("what would you like to do?\n\na) Board Passenger\nb) Check Seat\nc) Disembark Passenger\nd) View Plane\ne) Exit Program\nf) Create New Plane");
 
         switch (input.next().charAt(0)){
             case 'a':
@@ -87,6 +87,8 @@ public class Driver {
                     Seat currentAccessor = newPlane.getSeat(row,seat);
                     currentAccessor.setVacancy(false); //Get the requested seat
 
+                input.nextLine(); //Clear Buffer
+
                     System.out.print("Enter the First Name of the Passenger:");
                     currentAccessor.setFirstName(input.nextLine()); //This sets the first name in the node
 
@@ -124,18 +126,51 @@ public class Driver {
                     if(newPlane.getSeat(row,seat).checkVacancy()){
                         System.out.println("\nThat seat is Vacant!\n");
                     }else{
-                        System.out.println("Showing the information of the passenger in row: " + row + " Seat: " + seat + "\nName: " + newPlane.getSeat(row,seat).getName() + "\n\n");
+                        System.out.println("\nShowing the information of the passenger in row: " + row + " Seat: " + seat + "\nName: " + newPlane.getSeat(row,seat).getName() + "\n");
                     }
 
                 break;
             case 'c':
-                //Do Something
+                    row = 0;//Reset
+                    while(row < 1 || row > newPlane.getRows()){ //These validate that the input are within reason
+                        System.out.print("Enter a row:");
+                        row = input.nextInt();
+                        if(row < 1 || row > newPlane.getRows()){
+                            System.out.println("Invalid Entry! Please try again");
+                        }
+                    }
+                    seat = 0;//Reset
+                    while(seat < 1 || seat > newPlane.getSeats()){
+                        System.out.print("Enter a seat:");
+                        seat = input.nextInt();
+                        if(seat < 1 || seat > newPlane.getSeats()){
+                            System.out.println("Invalid Entry! Please try again");
+                        }
+                    }
+
+                    Seat currentSeat = newPlane.getSeat(row,seat); //Storing the current seat
+
+                    currentSeat.setVacancy(true); //Change vacancy
+                    currentSeat.setFirstName(null); //Remove the first name
+                    currentSeat.setLastName(null); //Remove the last seat
+
+                    System.out.println("Removed the passenger");
                 break;
             case 'd':
                     printPlane();
                 break;
             case 'e':
                     inApplication = false; //Terminate program
+                break;
+            case 'f':
+                System.out.println("Enter the number of rows in your new plane: ");
+                int rows = input.nextInt();
+                System.out.println("Enter the number of seats for each row in your new plane: ");
+                int seats = input.nextInt();
+
+                newPlane = new Plane(rows,seats); //Re-creating the plane with new dimensions
+
+                System.out.println("Your new plane has been created!");
                 break;
             default:
                     System.out.println("Invalid Input! Please try again\n\n");
@@ -207,4 +242,5 @@ public class Driver {
 
         return row;
     }
+
 }
