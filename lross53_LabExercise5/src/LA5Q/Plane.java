@@ -1,3 +1,12 @@
+/*
+RATIONAL FOR THIS CLASS
+
+For the rows portion of this I chose to use an array. The reasoning for this was because I already intended to use a double linked list for the seats which I thought
+would take a very long time to get working. I could have also used a linked list for the rows, especially if you ever wanted to search bidirectionally if the plane were
+ever large enough to warrant it. Instead, I used an array as it is quite easy to implement, and it is not nearly as large as the seats so its complexity did not need
+to be very high in my opinion.
+ */
+
 package LA5Q;
 
 public class Plane {

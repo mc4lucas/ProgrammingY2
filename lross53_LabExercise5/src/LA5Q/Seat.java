@@ -1,3 +1,9 @@
+/*
+RATIONAL FOR THIS CLASS
+
+The purpose of this class is to supply the linked list with a "node". It is just the backbone of my double linked list.
+ */
+
 package LA5Q;
 
 public class Seat {

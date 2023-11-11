@@ -1,3 +1,12 @@
+/*
+RATIONAL FOR THIS CLASS
+
+This class pulls all the other classes together into one application. If I were re-doing this assignment I would probably have seperated the "CASES" into separate classes
+to provide more structure and clean up this class a bit as it is very large. The other major change I would have made would be to use for-loops instead of while loops. I
+have always used while loops as I have never found a need to use for loops (I also like while loops for debugging), but this is by far the largest program I have made, and it is
+clear now that for-loops would be a lot safer as they would for sure iterate and close properly.
+ */
+
 package LA5Q;
 
 import java.util.Scanner;
@@ -24,17 +33,17 @@ public class Driver {
     public static void main(String[] args){
 
         myHeader(1); //Header
-        while(inApplication){
-            makeRequest();
+        while(inApplication){ //Used to end application when requested
+            makeRequest(); //Calling my selection method
         }
         myFooter(1); //Footer
 
     }
 
-    public static void makeRequest(){
+    public static void makeRequest(){ //This class will verify the user input and run the proper methods required for the selection of the user
         System.out.println("what would you like to do?\n\na) Board Passenger\nb) Check Seat\nc) Disembark Passenger\nd) View Plane\ne) Exit Program\nf) Create New Plane");
 
-        switch (input.next().charAt(0)){
+        switch (input.next().charAt(0)){ //Used to verify input from the user
             case 'a':
                 //region Case A
                     int row; //Storage var
@@ -58,7 +67,7 @@ public class Driver {
                         }
 
                         //Check that seat is vacant
-                        if(!newPlane.getSeat(row,seat).checkVacancy()){
+                        if(!newPlane.getSeat(row,seat).checkVacancy()){ //Check if the seat is vacant or not
                             System.out.println("This seat is not Vacant! Please refer back to the map and enter a seat that is vacant!");
 
                             boolean pick = false;
@@ -74,7 +83,7 @@ public class Driver {
                                         seat = 0;
                                         pick = true;
                                         break;
-                                    default:
+                                    default: //Called if the user enters an invalid entry
                                         System.out.println("Invalid Entry!");
                                         break;
                                 }
@@ -84,7 +93,7 @@ public class Driver {
 
                 //Actually do something
 
-                    Seat currentAccessor = newPlane.getSeat(row,seat);
+                    Seat currentAccessor = newPlane.getSeat(row,seat); //Creating a reference to the selected seat
                     currentAccessor.setVacancy(false); //Get the requested seat
 
                 input.nextLine(); //Clear Buffer

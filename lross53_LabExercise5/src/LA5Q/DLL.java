@@ -1,3 +1,15 @@
+/*
+RATIONAL FOR THIS CLASS
+
+I chose to use a double linked list for the seats portion of the plane. The reason i did this instead of just using a 2d array is because I find that by using a linked list
+you have more expandability for the future. The linked list is an easier method of inserting and removing data in my opinion as it does not require a complete recreation
+as apposed to if you were using arrays. That would be especially bad as you would have to array copy a 2d array which would be very cumbersome. I also specifically chose
+a double linked list instead of a single. The reasoning for this is because with a double linked list you can traverse in two directions, forward and back. Although I am
+only ever adding from the rear and pulling information from the front, since this application is dynamic, if you had 100 rows and seats, and you wanted to access seat 99, you
+could then start your search from the rear of the linked list instead of the front, in addition to searching from the front if it were seat 1.
+ */
+
+
 package LA5Q;
 
 public class DLL {
