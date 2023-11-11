@@ -1,3 +1,5 @@
+//Each class has a rational, they are in a /* */ comment, so they may be shrunk! this one starts on line 3!
+
 /*
 RATIONAL FOR THIS CLASS
 
