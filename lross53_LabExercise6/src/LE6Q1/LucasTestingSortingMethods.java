@@ -108,10 +108,10 @@ public class LucasTestingSortingMethods {
         T temp; //Storage var
 
         while(left <= right){
-            while(left <= right && pivot.compareTo(s[left]) >= 0){++left;}
-            while(left <= right && s[right].compareTo(pivot) >= 0){--right;}
+            while(left <= right && pivot.compareTo(s[left]) >= 0){++left;} //Compare the left value to pivot and check that it is smaller
+            while(left <= right && s[right].compareTo(pivot) >= 0){--right;} //Compare the right value to pivot and check if it is bigger than it
 
-            if(left < right){
+            if(left < right){ //This will swap the left and right values once the correct values have been found
                 temp = s[left];
                 s[left] = s[right];
                 s[right] = temp;
@@ -119,11 +119,14 @@ public class LucasTestingSortingMethods {
                 --right;
             }
         }
-        temp = s[left];
-        s[left] = s[b];
-        s[b] = temp;
 
-        quickSort(s,a,left-1);
+        //This portions swaps the pivot back to middle
+
+        temp = s[left]; //Placing the left val in storage
+        s[left] = s[b]; //Swapping 1 with 2
+        s[b] = temp; //Replace 2
+
+        quickSort(s,a,left-1); //Re-call these to continue the sorting process
         quickSort(s,left + 1,b);
     }
     public static long bucketSort(Integer[] a, int first, int last, int maxDigits) {
@@ -132,14 +135,20 @@ public class LucasTestingSortingMethods {
         Vector<Integer>[] bucket = new Vector[10]; //One bucket for each number
 
         for(int i=0; i < 10; i++){
-            bucket[i] = new Vector<>();
+            bucket[i] = new Vector<>(); //Instantiate vector ref var for each bucket
         }
         for(int i=0; i< maxDigits; i++){
+
+            //Clear all the buckets
+
             for(int j=0; j<10; j++){
                 bucket[j].removeAllElements();
             }
-            for(int index = first; index<=last; index++){
-                Integer digit = findDigit(a[index],i);
+
+            //Insert the next round of values into bucket
+
+            for(int index = first; index<=last; index++){ //For each value sort into the buckets
+                Integer digit = findDigit(a[index],i); //choosing a bucket based on the val
                 bucket[digit].add(a[index]);
             }
             int index = 0;
@@ -152,7 +161,7 @@ public class LucasTestingSortingMethods {
 
         return System.nanoTime()-time; //Return the time taken
     }
-    public static Integer findDigit(int number, int i){
+    public static Integer findDigit(int number, int i){ //Determines which bucket the value should go in based on its number in the xth-place
         int target = 0;
         for(int k=0; k<= i; k++){
             target = number % 10;
