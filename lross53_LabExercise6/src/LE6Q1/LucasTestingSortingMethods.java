@@ -52,14 +52,14 @@ public class LucasTestingSortingMethods {
         int j = 1; //De-incrementor
 
 
-        for(int i=1; i<a.length-1; i++){
+        for(int i=1; i<a.length; i++){
 
-            j = i;//Temp incrementor
+            j = i-1;//Temp incrementor
 
-            while(j > 0 && a[j].compareTo(a[j-1]) < 0){
-                temp = a[i]; //Store temp
-                a[i] = a[i-1]; //Replace 2 with 1
-                a[i-1] = temp; //Replace 1 with 2
+            while(j >= 0 && a[j+1].compareTo(a[j]) < 0){
+                temp = a[j+1]; //Store temp
+                a[j+1] = a[j]; //Replace 2 with 1
+                a[j] = temp; //Replace 1 with 2
                 temp = null; //Clean up
 
                 j = j - 1; //Decrease
@@ -67,7 +67,7 @@ public class LucasTestingSortingMethods {
         }
 
         return System.nanoTime() - time; //Return the time taken to sort
-    } //PROBLEM WITH THIS ONE
+    }
 
     public static <T extends Comparable <? super T>>long mergeSort(T[] a){
         time = System.nanoTime(); //Time stamp
@@ -87,7 +87,7 @@ public class LucasTestingSortingMethods {
 
         int i=0,j=0; //Pos vars
         while(i+j < a.length){ //While there are elements to merge
-            if(j == right.length || (i < left.length && left[i].compareTo(right[j]) < 0)){ //ASK MOE ABOUT THIS LINE
+            if(j == right.length || (i < left.length && left[i].compareTo(right[j]) < 0)){ //Checks and compares the first element of each side
                 a[i+j] = left[i++]; //Merge left
             }else{
                 a[i+j] = right[j++]; //Merge right
@@ -97,40 +97,73 @@ public class LucasTestingSortingMethods {
         return System.nanoTime() - time; //Return the time taken to sort the array
     }
 
-    public static void bucketSort(Integer[] a, int first, int last, int maxDigits) {
-        //since the radix is 5, creating 5 buckets using Vector. Assumption:positive numbers only
-        Vector<Integer>[] bucket = new Vector[5];
-        //instantiate each bucket;
-        for (int i = 0; i < 10; i++)
+    public static <T extends Comparable<? super T>> void quickSort(T[] s, int a, int b){
+        if(a>=b)
+            return;
+
+        int left = a; //Set the left limit
+        int right = b-1; //Set the right limit
+
+        T pivot = s[b]; //Set your pivot
+        T temp; //Storage var
+
+        while(left <= right){
+            while(left <= right && pivot.compareTo(s[left]) >= 0){++left;}
+            while(left <= right && s[right].compareTo(pivot) >= 0){--right;}
+
+            if(left < right){
+                temp = s[left];
+                s[left] = s[right];
+                s[right] = temp;
+                ++left;
+                --right;
+            }
+        }
+        temp = s[left];
+        s[left] = s[b];
+        s[b] = temp;
+
+        quickSort(s,a,left-1);
+        quickSort(s,left + 1,b);
+    }
+    public static long bucketSort(Integer[] a, int first, int last, int maxDigits) {
+        time = System.nanoTime(); //Take a timestamp
+
+        Vector<Integer>[] bucket = new Vector[10];
+
+        for(int i=0; i < 10; i++){
             bucket[i] = new Vector<>();
-        for (int i = 0; i < maxDigits; i++) {
-            //clear the Vector buckets
-            for (int j = 0; j < 10; j++) {
+        }
+        for(int i=0; i< maxDigits; i++){
+            for(int j=0; j<10; j++){
                 bucket[j].removeAllElements();
             }
-            //Placing a[index] at end of bucket[digit]
-            for (int index = first; index <= last; index++) {
-                Integer digit = findDigit(a[index], i);
+            for(int index = first; index<=last; index++){
+                Integer digit = findDigit(a[index],i);
                 bucket[digit].add(a[index]);
             }
-            //placing all the buckets back into the array
             int index = 0;
-            for (int m = 0; m < 10; m++) {
-                for (int n = 0; n < bucket[m].size(); n++) {
+            for(int m = 0; m < 10; m++){
+                for(int n=0; n<bucket[m].size(); n++){
                     a[index++] = bucket[m].get(n);
                 }
             }
         }
+
+        return System.nanoTime()-time; //Return the time taken
     }
-    //The following method extracts the ith digit from a decimal number
-    public static Integer findDigit(int number, int i) {
+    public static Integer findDigit(int number, int i){
         int target = 0;
-        for (int k = 0; k <= i; k++) {
+        for(int k=0; k<= i; k++){
             target = number % 10;
-            number = number / 10;
+            number = number /10;
         }
+
         return target;
     }
+
+
+
 
     //region Header & footer
     public static String splitter = "======================================================="; //Storage var for the long splitter used in header and footer methods
@@ -176,7 +209,7 @@ public class LucasTestingSortingMethods {
 
         //region SelectionSort
         System.out.printf("\nThe unsorted list: %S\n", list.toString()); //Prints the unsorted list
-        System.out.printf("My Selection-Sort Time: %s milliseconds\n",selectionSort(primaryArray));
+        System.out.printf("My Selection-Sort Time: %s milliseconds\n",selectionSort(primaryArray) / (Math.pow(10, 6)));
         System.out.printf("The sorted list using Selection-Sort: %s\n", list.toString()); //Prints the sorted list
 
         System.arraycopy(backupArray, 0, primaryArray, 0, backupArray.length); //Reset the primary array
@@ -184,7 +217,7 @@ public class LucasTestingSortingMethods {
 
         //region BubbleSort
         System.out.printf("\nThe unsorted list: %S\n", list.toString()); //Prints the unsorted list
-        System.out.printf("My Bubble-Sort Time: %s milliseconds\n",bubbleSort(primaryArray));
+        System.out.printf("My Bubble-Sort Time: %s milliseconds\n",bubbleSort(primaryArray) / (Math.pow(10, 6)));
         System.out.printf("The sorted list using Bubble-Sort: %s\n", list.toString()); //Prints the sorted list
 
         System.arraycopy(backupArray, 0, primaryArray, 0, backupArray.length); //Reset the primary array
@@ -192,7 +225,7 @@ public class LucasTestingSortingMethods {
 
         //region InsertionSort
         System.out.printf("\nThe unsorted list: %S\n", list.toString()); //Prints the unsorted list
-        System.out.printf("My Insertion-Sort Time: %s milliseconds\n",insertionSort(primaryArray));
+        System.out.printf("My Insertion-Sort Time: %s milliseconds\n",insertionSort(primaryArray) / (Math.pow(10, 6)));
         System.out.printf("The sorted list using Insertion-Sort: %s\n", list.toString()); //Prints the sorted list
 
         System.arraycopy(backupArray, 0, primaryArray, 0, backupArray.length); //Reset the primary array
@@ -200,15 +233,28 @@ public class LucasTestingSortingMethods {
 
         //region MergeSort
         System.out.printf("\nThe unsorted list: %S\n", list.toString()); //Prints the unsorted list
-        System.out.printf("My Merge-Sort Time: %s milliseconds\n",mergeSort(primaryArray));
+        System.out.printf("My Merge-Sort Time: %s milliseconds\n",mergeSort(primaryArray) / (Math.pow(10, 6)));
         System.out.printf("The sorted list using Merge-Sort: %s\n", list.toString()); //Prints the sorted list
+
+        System.arraycopy(backupArray, 0, primaryArray, 0, backupArray.length); //Reset the primary array
+        //endregion
+
+        //region QuickSort
+        time = System.nanoTime(); //Take timestamp
+        quickSort(primaryArray,0, primaryArray.length-1);
+        System.out.printf("\nThe unsorted list: %S\n", list.toString()); //Prints the unsorted list
+        System.out.printf("My Quick-Sort Time: %s milliseconds\n",((System.nanoTime()-time) / (Math.pow(10, 6))));
+        System.out.printf("The sorted list using Quick-Sort: %s\n", list.toString()); //Prints the sorted list
 
         System.arraycopy(backupArray, 0, primaryArray, 0, backupArray.length); //Reset the primary array
         //endregion
 
         //region BucketSort
         System.out.printf("\nThe unsorted list: %S\n", list.toString()); //Prints the unsorted list
-        System.out.printf("My Bucket-Sort Time: %s milliseconds\n",bucketSort(primaryArray,0,4,5));
+
+        long timeDiff = LucasTestingSortingMethods.bucketSort(primaryArray,0,primaryArray.length-1,2);
+
+        System.out.printf("My Bucket-Sort Time: %s milliseconds\n",timeDiff / (Math.pow(10, 6)));
         System.out.printf("The sorted list using Bucket-Sort: %s\n", list.toString()); //Prints the sorted list
 
         System.arraycopy(backupArray, 0, primaryArray, 0, backupArray.length); //Reset the primary array
