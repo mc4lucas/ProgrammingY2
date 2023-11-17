@@ -129,7 +129,7 @@ public class LucasTestingSortingMethods {
     public static long bucketSort(Integer[] a, int first, int last, int maxDigits) {
         time = System.nanoTime(); //Take a timestamp
 
-        Vector<Integer>[] bucket = new Vector[10];
+        Vector<Integer>[] bucket = new Vector[10]; //One bucket for each number
 
         for(int i=0; i < 10; i++){
             bucket[i] = new Vector<>();
@@ -201,7 +201,7 @@ public class LucasTestingSortingMethods {
         System.out.printf("The unsorted list: %S\n", list.toString()); //Prints the unsorted list
         time = System.nanoTime(); //Takes a time stamp
         Collections.sort(list); //Sorts the list
-        System.out.printf("Collections' Sorting Time: %s milliseconds\n", ((System.nanoTime() - time) / (Math.pow(10, 6)))); //Calculates the time taken to sort the list
+        System.out.printf("Collections' Sorting Time: %.2f milliseconds\n", ((System.nanoTime() - time) / (Math.pow(10, 6)))); //Calculates the time taken to sort the list
         System.out.printf("The sorted list using Collections' sort method: %s\n", list.toString()); //Prints the sorted list
 
         System.arraycopy(backupArray, 0, primaryArray, 0, backupArray.length); //Reset the primary array
@@ -209,7 +209,7 @@ public class LucasTestingSortingMethods {
 
         //region SelectionSort
         System.out.printf("\nThe unsorted list: %S\n", list.toString()); //Prints the unsorted list
-        System.out.printf("My Selection-Sort Time: %s milliseconds\n",selectionSort(primaryArray) / (Math.pow(10, 6)));
+        System.out.printf("My Selection-Sort Time: %.2f milliseconds\n",selectionSort(primaryArray) / (Math.pow(10, 6)));
         System.out.printf("The sorted list using Selection-Sort: %s\n", list.toString()); //Prints the sorted list
 
         System.arraycopy(backupArray, 0, primaryArray, 0, backupArray.length); //Reset the primary array
@@ -217,7 +217,7 @@ public class LucasTestingSortingMethods {
 
         //region BubbleSort
         System.out.printf("\nThe unsorted list: %S\n", list.toString()); //Prints the unsorted list
-        System.out.printf("My Bubble-Sort Time: %s milliseconds\n",bubbleSort(primaryArray) / (Math.pow(10, 6)));
+        System.out.printf("My Bubble-Sort Time: %.2f milliseconds\n",bubbleSort(primaryArray) / (Math.pow(10, 6)));
         System.out.printf("The sorted list using Bubble-Sort: %s\n", list.toString()); //Prints the sorted list
 
         System.arraycopy(backupArray, 0, primaryArray, 0, backupArray.length); //Reset the primary array
@@ -225,7 +225,7 @@ public class LucasTestingSortingMethods {
 
         //region InsertionSort
         System.out.printf("\nThe unsorted list: %S\n", list.toString()); //Prints the unsorted list
-        System.out.printf("My Insertion-Sort Time: %s milliseconds\n",insertionSort(primaryArray) / (Math.pow(10, 6)));
+        System.out.printf("My Insertion-Sort Time: %.2f milliseconds\n",insertionSort(primaryArray) / (Math.pow(10, 6)));
         System.out.printf("The sorted list using Insertion-Sort: %s\n", list.toString()); //Prints the sorted list
 
         System.arraycopy(backupArray, 0, primaryArray, 0, backupArray.length); //Reset the primary array
@@ -233,7 +233,7 @@ public class LucasTestingSortingMethods {
 
         //region MergeSort
         System.out.printf("\nThe unsorted list: %S\n", list.toString()); //Prints the unsorted list
-        System.out.printf("My Merge-Sort Time: %s milliseconds\n",mergeSort(primaryArray) / (Math.pow(10, 6)));
+        System.out.printf("My Merge-Sort Time: %.2f milliseconds\n",mergeSort(primaryArray) / (Math.pow(10, 6)));
         System.out.printf("The sorted list using Merge-Sort: %s\n", list.toString()); //Prints the sorted list
 
         System.arraycopy(backupArray, 0, primaryArray, 0, backupArray.length); //Reset the primary array
@@ -243,7 +243,7 @@ public class LucasTestingSortingMethods {
         time = System.nanoTime(); //Take timestamp
         quickSort(primaryArray,0, primaryArray.length-1);
         System.out.printf("\nThe unsorted list: %S\n", list.toString()); //Prints the unsorted list
-        System.out.printf("My Quick-Sort Time: %s milliseconds\n",((System.nanoTime()-time) / (Math.pow(10, 6))));
+        System.out.printf("My Quick-Sort Time: %.2f milliseconds\n",((System.nanoTime()-time) / (Math.pow(10, 6))));
         System.out.printf("The sorted list using Quick-Sort: %s\n", list.toString()); //Prints the sorted list
 
         System.arraycopy(backupArray, 0, primaryArray, 0, backupArray.length); //Reset the primary array
@@ -254,7 +254,7 @@ public class LucasTestingSortingMethods {
 
         long timeDiff = LucasTestingSortingMethods.bucketSort(primaryArray,0,primaryArray.length-1,2);
 
-        System.out.printf("My Bucket-Sort Time: %s milliseconds\n",timeDiff / (Math.pow(10, 6)));
+        System.out.printf("My Bucket-Sort Time: %.2f milliseconds\n",timeDiff / (Math.pow(10, 6)));
         System.out.printf("The sorted list using Bucket-Sort: %s\n", list.toString()); //Prints the sorted list
 
         System.arraycopy(backupArray, 0, primaryArray, 0, backupArray.length); //Reset the primary array
