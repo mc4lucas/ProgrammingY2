@@ -17,7 +17,7 @@ public class LucasDemoHashingWithLinearProbing {
 
     //region Vars
         public static int items; //Field to hold the value of total # of data items to add to hash table
-        public static Scanner input; //User input
+        public static Scanner input = new Scanner(System.in); //User input
         public static double lf; //Load factor var
         public static int tableCapacity; //Table capacity var
         public static LucasValueEntry[] hashTable; //hashTable
@@ -27,18 +27,19 @@ public class LucasDemoHashingWithLinearProbing {
     public static void addValueLinearProbe(Integer i){
         boolean found = false; //Loop exit
 
-        int pos = i % hashTable.length; //Find index
+        int pos = Math.abs(i % tableCapacity); //Find index
 
         while(!found){
-            if(hashTable[pos].getKey() == null || hashTable[pos].getKey() == -111 || hashTable[pos].getKey() == -1){ //Check if the spot is available
+            //System.out.println(pos + 1);//Debug
+            if(hashTable[pos].getKey() == null || hashTable[pos].getKey().equals(-111) || hashTable[pos].getKey().equals(-1)){ //Check if the spot is available
                 hashTable[pos].setKey(i); //If so place it here
 
                 found = true; //Exit loop
             }else{
+                pos++; //Increment
+
                 if(pos == hashTable.length){
                     pos=0; //Reset to front of hashtable
-                }else{
-                    pos++; //Increment index
                 }
             }
         }
@@ -59,7 +60,7 @@ public class LucasDemoHashingWithLinearProbing {
 
     public static void removeValueLinearProbe(Integer i){
         boolean exit = false; //Loop exit
-        int pos = i % hashTable.length; //Index location
+        int pos = Math.abs(i % tableCapacity); //Index location
 
         while(!exit){
             if(hashTable[i].getKey().equals(i)){ //Find at index
@@ -86,16 +87,18 @@ public class LucasDemoHashingWithLinearProbing {
 
         for(int x = 0; x< hashTable.length;x++){ //If it is null
             if(hashTable[x].getKey().equals(-1)){
-                message = " null,";
+                message = "null, ";
             }
-            if(hashTable[x].getKey().equals(-111)){ //If it is available
-                message = " available,";
+            else if(hashTable[x].getKey().equals(-111)){ //If it is available
+                message = "available, ";
             }else{
-                message = " " + hashTable[x].getKey() + ","; //If it has a value
+                message = hashTable[x].getKey() + ", "; //If it has a value
             }
+
+            System.out.print(message); //Print the message
         }
 
-        System.out.print("]\n"); //Print lead
+        System.out.print("\b\b]\n"); //Print lead
     }
 
     public static void rehashingWithLinearProbe(){
@@ -119,22 +122,22 @@ public class LucasDemoHashingWithLinearProbing {
         myHeader(1); //Calling the header
 
         System.out.print("Let's decide on the initial table capacity based on the load factor and dataset size\n" + "How many data items: "); //Request input
-        tableCapacity = input.nextInt(); //Take user input
+        items = input.nextInt(); //Take user input
 
         System.out.print("What is the load factor (Recommended: <= 0.5): "); //Request input
-        lf = input.nextInt(); //Take user input
+        lf = input.nextDouble(); //Take user input
 
-        tableCapacity = checkPrime(tableCapacity * (int)Math.ceil(1/lf)); //Determine capacity
+        tableCapacity = checkPrime((int)(items/lf)); //Determine capacity
         System.out.println("The minimum required table capacity would be: " + tableCapacity); //print capacity
         hashTable = new LucasValueEntry[tableCapacity]; //Create a new hashtable
 
-        for(int x = 0; x<hashTable.length; x++){
+        for(int x = 0; x< hashTable.length; x++){
             hashTable[x] = new LucasValueEntry(); //Instantiate with null value
         }
 
-        for(int x = 0; x<hashTable.length; x++){
+        for(int x = 0; x<items; x++){
             System.out.printf("Enter item %s: ",x+1); //Request user input
-            hashTable[x] = new LucasValueEntry(input.nextInt()); //Instantiate with user given value
+            addValueLinearProbe(input.nextInt()); //Instantiate with user given value
         }
 
         printHashTable(); //Print the Hash Table
