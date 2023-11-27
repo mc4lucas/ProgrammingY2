@@ -27,7 +27,10 @@ public class LucasDemoHashingWithLinearProbing {
     public static void addValueLinearProbe(Integer i){
         boolean found = false; //Loop exit
 
-        int pos = Math.abs(i % tableCapacity); //Find index
+        int pos = (i % tableCapacity); //Find index
+        if(pos < 0){
+            pos = pos + tableCapacity;
+        }
 
         while(!found){
             //System.out.println(pos + 1);//Debug
@@ -60,14 +63,23 @@ public class LucasDemoHashingWithLinearProbing {
 
     public static void removeValueLinearProbe(Integer i){
         boolean exit = false; //Loop exit
-        int pos = Math.abs(i % tableCapacity); //Index location
+
+
+        int pos = (i % tableCapacity); //Find index
+        if(pos < 0){
+            pos = pos + tableCapacity;
+        }
 
         while(!exit){
-            if(hashTable[i].getKey().equals(i)){ //Find at index
-                hashTable[i].setKey(-111); //Replace with available
-            }else if(hashTable[i].getKey() == -1){ //Found a null location
+            if(hashTable[pos].getKey().equals(i)){ //Find at index
+                hashTable[pos].setKey(-111); //Replace with available
+
+                System.out.printf("%s is Found and removed! ",i); //Alert the user
+
+                exit = true;
+            }else if(hashTable[pos].getKey() == -1){ //Found a null location
                 //Found a null location
-                System.out.printf("%s is not found!\n",i); //Alert the user
+                System.out.printf("%s is not found! ",i); //Alert the user
 
                 exit = true; //Break the loop
             }else{
@@ -83,7 +95,7 @@ public class LucasDemoHashingWithLinearProbing {
     public static void printHashTable(){
         String message; //Storage var
 
-        System.out.print("["); //Print lead
+        System.out.print("The current Hash-Table: ["); //Print lead
 
         for(int x = 0; x< hashTable.length;x++){ //If it is null
             if(hashTable[x].getKey().equals(-1)){
@@ -102,15 +114,19 @@ public class LucasDemoHashingWithLinearProbing {
     }
 
     public static void rehashingWithLinearProbe(){
-        int newSize = checkPrime(hashTable.length * 2); //Find the next prime number
+        tableCapacity = checkPrime(hashTable.length * 2); //Find the next prime number
 
         workingHashTable = new LucasValueEntry[hashTable.length]; //Update size
         System.arraycopy(hashTable,0,workingHashTable,0,hashTable.length); //Copy the array
 
-        hashTable = new LucasValueEntry[newSize]; //Update size
+        hashTable = new LucasValueEntry[tableCapacity]; //Update size
+
+        for(int x = 0; x< hashTable.length; x++){
+            hashTable[x] = new LucasValueEntry(); //Instantiate with null value
+        }
 
         for(int x=0; x< workingHashTable.length; x++){
-            if(workingHashTable[x].getKey() != -1 || workingHashTable[x].getKey() != -111){ //Check that it is not null or available
+            if(!workingHashTable[x].getKey().equals(-1) || !workingHashTable[x].getKey().equals(-111)){ //Check that it is not null or available
                 addValueLinearProbe(workingHashTable[x].getKey()); //Rehash and put in new table
             }
         }
