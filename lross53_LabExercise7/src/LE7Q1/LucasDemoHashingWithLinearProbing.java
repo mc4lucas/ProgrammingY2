@@ -126,7 +126,7 @@ public class LucasDemoHashingWithLinearProbing {
         }
 
         for(int x=0; x< workingHashTable.length; x++){
-            if(!workingHashTable[x].getKey().equals(-1) || !workingHashTable[x].getKey().equals(-111)){ //Check that it is not null or available
+            if(!workingHashTable[x].getKey().equals(-1) && !workingHashTable[x].getKey().equals(-111)){ //Check that it is not null or available
                 addValueLinearProbe(workingHashTable[x].getKey()); //Rehash and put in new table
             }
         }
